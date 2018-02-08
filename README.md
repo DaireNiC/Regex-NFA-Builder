@@ -33,5 +33,6 @@ these to all of the digits, and the characters a to z, and A to Z.
     4. Implement the matching algorithm using the NFA.
     
 ### Parsing regex from infix to postfix 
-*res (1): http://interactivepython.org/runestone/static/pythonds/BasicDS/InfixPrefixandPostfixExpressions.html
-     (2): https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
+Resources:
+* (1): http://interactivepython.org/runestone/static/pythonds/BasicDS/InfixPrefixandPostfixExpressions.html
+* (2): https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
