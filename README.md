@@ -31,3 +31,7 @@ these to all of the digits, and the characters a to z, and A to Z.
     2. Build a series of small NFA’s for parts of the regular expression.
     3. Use the smaller NFA’s to create the overall NFA.
     4. Implement the matching algorithm using the NFA.
+    
+### Parsing regex from infix to postfix 
+*res (1): http://interactivepython.org/runestone/static/pythonds/BasicDS/InfixPrefixandPostfixExpressions.html
+     (2): https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
