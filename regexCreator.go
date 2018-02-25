@@ -5,19 +5,46 @@ import (
 )
 
 func intopost (infix string) string {
-	// using runes instead of string --> UTF-8
-	// array of runes (chars)
+	// using runes instead of string, in GO --> UTF-8
 
 	// ref for special chars & precendence
-	special := map[rune] int{'*':10, '.':9, '|': 8}
-	
+	specials := map[rune] int{'*':10, '.':9, '|': 8}
+	// array of runes (chars)
 	postfix := []rune{}
 	//store operators from infix
 	stack :=[]rune{}
 
+	//loop through infix, return index of char currently reading
+	//r is the char*(rune) at that index
+	for _, r := range infix {
+		switch {
+			case r == '(':
+				//put bracket on stack
+				stack = append(stack,r)
+			//while last char on stack not a closing bracket
+			case r == ')':
+				for stack[len(stack) -1] != '(' {
+					postfix = append(postfix, stack[len(stack)-1])
+					stack = stack[:len(stack) -1] //everything in stack up to final char
+				}
+				stack = stack[:len(stack) -1]
+			// if element isn't in map, return 0
+			case specials[r] > 0:
+				for len(stack) > 0 && specials[r] <= specials[stack[len(stack) -1]]{
+					postfix = append(postfix, stack[len(stack)-1])
+					stack = stack[:len(stack) -1]
+				}
+				stack = append(stack,r)
+			default:
+				postfix = append(postfix, r)
+		}
+	}
 
-
-
+	for len(stack) > 0{
+		//take top el of stack & put on top of postfix
+		postfix = append(postfix, stack[len(stack)-1])
+		stack = stack[:len(stack) -1]
+	}
 
 	//cast runes to string
 	return string(postfix)
