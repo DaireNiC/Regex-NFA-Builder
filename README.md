@@ -36,3 +36,7 @@ these to all of the digits, and the characters a to z, and A to Z.
 Resources:
 * (1): http://interactivepython.org/runestone/static/pythonds/BasicDS/InfixPrefixandPostfixExpressions.html
 * (2): https://www.geeksforgeeks.org/stack-set-2-infix-to-postfix/
+* (3): [Youtube Video on Shunting Yard Algorithm](https://www.youtube.com/watch?v=HJOnJU77EUs)
+* (4): [Go Lang video provided by Ian McLoughlin](https://web.microsoftstream.com/video/9d83a3f3-bc4f-4bda-95cc-b21c8e67675e)
+
+
