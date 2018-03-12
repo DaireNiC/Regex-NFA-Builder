@@ -41,7 +41,7 @@ func intopost (infix string) string {
 	}
 
 	for len(stack) > 0{
-		//take top el of stack & put on top of postfix
+		//take top el of stack & put on top of postfixs
 		postfix = append(postfix, stack[len(stack)-1])
 		stack = stack[:len(stack) -1]
 	}
@@ -52,7 +52,17 @@ func intopost (infix string) string {
 
 func main(){
 	//Answer : ab.c*
+	fmt.Println("Example 1: ")
 	fmt.Println("Infix:", "a.b.c*")
 	fmt.Println("Postfix: ", intopost("a.b.c*"))
+
+	//Answer : ab*c.b|
+	fmt.Println("\nExample 2:")
+	fmt.Println("Infix: ", "a*b.c|b")
+	fmt.Println("Postfix: ", intopost("a*b.c|b"))
+
+	//Answer : a|c*b
+	fmt.Println("Infix: ", "a|c*b")
+	fmt.Println("Postfix: ", intopost("a|c*b"))
 
 }
