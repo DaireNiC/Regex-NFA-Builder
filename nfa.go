@@ -86,21 +86,55 @@ func poregtonfa(pofix string) *nfa{
 }
 
 func pomatch (po string, s string) bool {
+	
 	ismatch := false
+	//create automata
 	ponfa := poregtonfa(po)
 
+	//initial state & everything you can get to from current state
 	current := []*state{}
 	next := []*state{}
 
-	for _, r := range s {
-		for _, c := range current {
 
+	current = addState(current[:], ponfa.initial, ponfa.accept)
+
+	/* 	Read a char at a time & take all current 
+	 	states checking if labelled
+	*/
+	for _, r := range s {
+		//current state
+		for _, c := range current {
+			//same symbol
+			if c.symbol == r{
+				next = addSate(next[:], s.edge1, ponfa.accept)
+
+			}
 
 		}
 		current, next = next, []*state{}
 	}
 
+	// loop through current state array and check if there are any accept states
+	for _, c := range current {
+		//same symbol
+		if c == ponfa.accept{
+			ismatch = true
+		break;
+		}
+	}
+
 	return ismatch
+}
+
+func addState(l []*state, s *state, a *state) []*state {
+	l = append(l, s)
+	//E arrows
+	if s.symbol == 0{  // special value rune
+		l = addState(l, s.edge1, a)
+		if s.edge1 != nil {
+			l = addState(l, s.edge2, a)
+		}
+	}
 }
 
 
