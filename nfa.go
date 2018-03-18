@@ -85,7 +85,26 @@ func poregtonfa(pofix string) *nfa{
 	return nfastack[0] 
 }
 
+func pomatch (po string, s string) bool {
+	ismatch := false
+	ponfa := poregtonfa(po)
+
+	current := []*state{}
+	next := []*state{}
+
+	for _, r := range s {
+		for _, c := range current {
+
+
+		}
+		current, next = next, []*state{}
+	}
+
+	return ismatch
+}
+
+
 func main(){
 	nfa := poregtonfa("ab.c|")
-	fmt.Println(nfa)
+	fmt.Println(&nfa)
 }
