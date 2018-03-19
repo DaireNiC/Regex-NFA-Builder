@@ -106,7 +106,7 @@ func pomatch (po string, s string) bool {
 		for _, c := range current {
 			//same symbol
 			if c.symbol == r{
-				next = addSate(next[:], s.edge1, ponfa.accept)
+				next = addState(next[:], c.edge1, ponfa.accept)
 
 			}
 
@@ -129,16 +129,16 @@ func pomatch (po string, s string) bool {
 func addState(l []*state, s *state, a *state) []*state {
 	l = append(l, s)
 	//E arrows
-	if s.symbol == 0{  // special value rune
+	if s != a && s.symbol == 0{  // special value rune
 		l = addState(l, s.edge1, a)
 		if s.edge1 != nil {
 			l = addState(l, s.edge2, a)
 		}
 	}
+	return l
 }
 
 
 func main(){
-	nfa := poregtonfa("ab.c|")
-	fmt.Println(&nfa)
+	fmt.Println(pomatch("av.c*|", "ccccc"))
 }
