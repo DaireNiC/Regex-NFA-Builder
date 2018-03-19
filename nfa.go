@@ -82,6 +82,9 @@ func poregtonfa(pofix string) *nfa{
 	
 	//should be only one item at end --> nfa you want to return
 	//TODO: error checking 
+	if len(nfastack) != 1{
+		fmt.Println("whoops! ", len(nfastack), nfastack)
+	}
 	return nfastack[0] 
 }
 
@@ -90,6 +93,7 @@ func pomatch (po string, s string) bool {
 	ismatch := false
 	//create automata
 	ponfa := poregtonfa(po)
+	fmt.Println(ponfa)
 
 	//initial state & everything you can get to from current state
 	current := []*state{}
@@ -107,9 +111,7 @@ func pomatch (po string, s string) bool {
 			//same symbol
 			if c.symbol == r{
 				next = addState(next[:], c.edge1, ponfa.accept)
-
 			}
-
 		}
 		current, next = next, []*state{}
 	}
@@ -119,7 +121,7 @@ func pomatch (po string, s string) bool {
 		//same symbol
 		if c == ponfa.accept{
 			ismatch = true
-		break;
+			break;
 		}
 	}
 
@@ -131,7 +133,7 @@ func addState(l []*state, s *state, a *state) []*state {
 	//E arrows
 	if s != a && s.symbol == 0{  // special value rune
 		l = addState(l, s.edge1, a)
-		if s.edge1 != nil {
+		if s.edge2 != nil {
 			l = addState(l, s.edge2, a)
 		}
 	}
@@ -140,5 +142,5 @@ func addState(l []*state, s *state, a *state) []*state {
 
 
 func main(){
-	fmt.Println(pomatch("av.c*|", "ccccc"))
+	fmt.Println(pomatch("ab.c*|", ""))
 }
