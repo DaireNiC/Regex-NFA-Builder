@@ -5,7 +5,7 @@ import (
 )
 
 func intopost (infix string) string {
-	// using runes instead of string, in GO --> UTF-8
+	// using runes instead of chars, in GO --> UTF-8
 
 	// ref for special chars & precendence
 	specials := map[rune] int{'*':10, '.':9, '|': 8}
@@ -21,11 +21,11 @@ func intopost (infix string) string {
 			case r == '(':
 				//put bracket on stack
 				stack = append(stack,r)
-			//while last char on stack not a closing bracket
 			case r == ')':
+				//while last char on stack not the closing bracket just read
 				for stack[len(stack) -1] != '(' {
 					postfix = append(postfix, stack[len(stack)-1])
-					stack = stack[:len(stack) -1] //everything in stack up to final char
+					stack = stack[:len(stack) -1] //everything in stack up to closing bracket
 				}
 				stack = stack[:len(stack) -1]
 			// if element isn't in map, return 0
