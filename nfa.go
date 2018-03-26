@@ -3,22 +3,29 @@ package main
 import (
 	"fmt"
 )
-
+/* State struct contains three parts:
+(1) Rune representing the character
+(2) One edge pointing to another state (character)
+(3) Another edge pointing to another state and edge
+*/
 type state struct {
 	symbol rune
 	edge1 *state
 	edge2 *state
 }
-
+// All non deterministic finite automata must have an initial and accept state
+// First step in creating nfa draw arrow from initial to accept with E label
 type nfa struct {
 	initial *state
 	accept *state
 }
 
+// Takes a postfix regular expression and converts it to an nfa,
+// returning a pointer to it
 func poregtonfa(pofix string) *nfa{
 	nfastack := []*nfa{}
 
-	//loop through exp rune at a time
+	//loop through expression rune at a time
 	for _, r := range pofix{
 
 		switch r{
@@ -127,7 +134,7 @@ func pomatch (po string, s string) bool {
 
 	return ismatch
 }
-
+//helper function
 func addState(l []*state, s *state, a *state) []*state {
 	l = append(l, s)
 	//E arrows
