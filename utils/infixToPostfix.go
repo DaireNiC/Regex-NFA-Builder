@@ -1,4 +1,4 @@
-package main
+package infixtoPostfix
 
 import (
 	"fmt"

@@ -1,8 +1,16 @@
-package main
+package nfaBuilder
 
 import (
 	"fmt"
+
 )
+/* References:
+(1) Thompsons algorithim in C: https://swtch.com/~rsc/regexp/regexp1.html
+(2) Ian Mcloughlin's Videos (gmit.Learnonline)
+*/
+
+
+
 /* State struct contains three parts:
 (1) Rune representing the character
 (2) One edge pointing to another state (character)
@@ -148,6 +156,3 @@ func addState(l []*state, s *state, a *state) []*state {
 }
 
 
-func main(){
-	fmt.Println(pomatch("ab.c*|", ""))
-}
