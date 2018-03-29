@@ -81,7 +81,7 @@ func poregtonfa(pofix string) *nfa{
 			//point at oold accpet state & new initial state
 			accept := state{}
 			//new initial state , point to old initial & new accept
-			initial := state{edge1: frag.initial, edge2: frag.accept}
+			initial := state{edge1: frag.initial, edge2: &accept}
 			frag.accept.edge1 = frag.initial //old frag with 2 extra states
 			frag.accept.edge2 = &accept
 
@@ -125,8 +125,8 @@ func poregtonfa(pofix string) *nfa{
 	}
 	return nfastack[0] 
 }
-
-func pomatch (po string, s string) bool {
+//this method runs a given sring through the NFA created returning  a bool indicationg if it is a match/not
+func PoMatch (po string, s string) bool {
 	
 	ismatch := false
 	//create automata
