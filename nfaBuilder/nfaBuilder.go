@@ -37,12 +37,12 @@ func poregtonfa(pofix string) *nfa{
 	for _, r := range pofix{
 
 		switch r{
-		//pop 2 things off nfa stack
+		// The . operator indicates concatination	
 		case '.':
-			//get last r off stack 
+			//pop 2 things off nfa stack
 			// LIFO order
 			frag2 := nfastack[len(nfastack) -1]
-			//remove popped item
+			//remove popped item from the stack
 			nfastack = nfastack[:len(nfastack)-1]
 			frag1 :=  nfastack[len(nfastack) -1]
 			nfastack = nfastack[:len(nfastack)-1]
@@ -52,7 +52,7 @@ func poregtonfa(pofix string) *nfa{
 			//pointer
 			//push new fragment(joined frags) onto nfa stack
 			nfastack = append(nfastack, &nfa{initial: frag1.initial, accept : frag2.accept})
-
+		// The | operator indicates alternation	
 		case '|':
 			//get last r off stack 
 			// LIFO order
@@ -73,7 +73,7 @@ func poregtonfa(pofix string) *nfa{
 			//pointer
 			//push new fragment(joined frags) onto nfa stack
 			nfastack = append(nfastack, &nfa{initial: &initial, accept :&accept})
-
+		// The Kleane star indicates zero or more	
 		case '*':
 			frag :=  nfastack[len(nfastack) -1]
 			//remove popped item
@@ -86,7 +86,30 @@ func poregtonfa(pofix string) *nfa{
 			frag.accept.edge2 = &accept
 
 			nfastack = append(nfastack, &nfa{initial: &initial, accept :&accept})
-			
+		// The + operator indicates one or more
+		case '+':
+			//pop one item
+			frag :=  nfastack[len(nfastack) -1]
+			//remove popped item from stack
+			nfastack =  nfastack[:len(nfastack)-1]
+			//accept state & new initial state
+			accept := state{}
+			//one edge going back to itself & another to the accept
+			initial := state{edge1: frag.initial, edge2: &accept}
+
+			frag.accept.edge1 = &initial
+
+			nfastack = append(nfastack, &nfa{initial: frag.initial, accept: &accept})
+		// The ? operator indicates zero or one
+		case '?':
+			//pop one item
+			frag :=  nfastack[len(nfastack) -1]
+			//remove popped item from stack
+			nfastack =  nfastack[:len(nfastack)-1]
+			//state pointing to popped item and accept state
+			initial := state{edge1: frag.initial, edge2: frag.accept}
+			// add the nfa to the stack
+			nfastack = append(nfastack, &nfa{initial: &initial, accept: frag.accept})
 		default:
 			accept := state{}
 			initial := state{symbol : r, edge1:  &accept }
