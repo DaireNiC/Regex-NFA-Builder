@@ -3,8 +3,8 @@ package infixtoPostfix
 import (
 	"fmt"
 )
-
-func intopost (infix string) string {
+//convert a string given in infix to postfix notation
+func IntoPost (infix string) string {
 	// using runes instead of chars, in GO --> UTF-8
 
 	// ref for special chars & precendence
@@ -45,24 +45,25 @@ func intopost (infix string) string {
 		postfix = append(postfix, stack[len(stack)-1])
 		stack = stack[:len(stack) -1]
 	}
-
+	fmt.Println(postfix)
 	//cast runes to string
 	return string(postfix)
+
 }
 
 func main(){
 	//Answer : ab.c*
 	fmt.Println("Example 1: ")
 	fmt.Println("Infix:", "a.b.c*")
-	fmt.Println("Postfix: ", intopost("a.b.c*"))
+	fmt.Println("Postfix: ", IntoPost("a.b.c*"))
 
 	//Answer : ab*c.b|
 	fmt.Println("\nExample 2:")
 	fmt.Println("Infix: ", "a*b.c|b")
-	fmt.Println("Postfix: ", intopost("a*b.c|b"))
+	fmt.Println("Postfix: ", IntoPost("a*b.c|b"))
 
 	//Answer : a|c*b
 	fmt.Println("Infix: ", "a|c*b")
-	fmt.Println("Postfix: ", intopost("a|c*b"))
+	fmt.Println("Postfix: ", IntoPost("a|c*b"))
 
 }
