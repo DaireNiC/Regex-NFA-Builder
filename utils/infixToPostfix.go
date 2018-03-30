@@ -8,7 +8,8 @@ func IntoPost (infix string) string {
 	// using runes instead of chars, in GO --> UTF-8
 
 	// ref for special chars & precendence
-	specials := map[rune] int{'*':10, '.':9, '|': 8}
+	// guidelines: http://www.boost.org/doc/libs/1_56_0/libs/regex/doc/html/boost_regex/syntax/basic_extended.html#boost_regex.syntax.basic_extended.operator_precedence
+	specials := map[rune] int{'*':10, '.':9,'+':8, '?':7, '|': 6 }
 	// array of runes (chars)
 	postfix := []rune{}
 	//store operators from infix
