@@ -64,14 +64,11 @@ func poregtonfa(pofix string) *nfa{
 			nfastack = nfastack[:len(nfastack)-1]
 
 			//create two new states 
+			//concat : join poppeded items like daisy chain
 			accept :=state{}
 			initial := state {edge1: frag1.initial, edge2 : frag2.initial}
 			frag1.accept.edge1 = &accept
 			frag2.accept.edge1 = &accept
-
-			//concat : join poppeded items like daisy chain
-			frag1.accept.edge1 = frag2.initial
-			//pointer
 			//push new fragment(joined frags) onto nfa stack
 			nfastack = append(nfastack, &nfa{initial: &initial, accept :&accept})
 		// The Kleane star indicates zero or more	
@@ -113,8 +110,8 @@ func poregtonfa(pofix string) *nfa{
 			nfastack = append(nfastack, &nfa{initial: &initial, accept: frag.accept})
 		
 		default:
-			fmt.Print("In default state       ")
-			fmt.Println(r, string(r))
+		//	fmt.Print("In default state       ")
+		//	fmt.Println(r, string(r))
 			accept := state{}
 			initial := state{symbol : r, edge1:  &accept }
 

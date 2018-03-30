@@ -1,15 +1,26 @@
-package infixtoPostfix
+package infixToPostfix
 
-import (
-	"fmt"
-)
-//convert a string given in infix to postfix notation
+/* Implementation of the Shunting Yard Algorithim in Go
+ Resources:
+ 	(1): https://en.wikipedia.org/wiki/Shunting-yard_algorithm
+	(2): http://eddmann.com/posts/shunting-yard-implementation-in-java/	
+	(3): https://www.youtube.com/watch?v=HJOnJU77EUs
+	(4): Video provided by Ian McLoughlin @GMIT
+*/
+
+//IntoPost a string given in infix to postfix notation
 func IntoPost (infix string) string {
 	// using runes instead of chars, in GO --> UTF-8
-
 	// ref for special chars & precendence
 	// guidelines: http://www.boost.org/doc/libs/1_56_0/libs/regex/doc/html/boost_regex/syntax/basic_extended.html#boost_regex.syntax.basic_extended.operator_precedence
-	specials := map[rune] int{'*':10, '.':9,'+':8, '?':7, '|': 6 }
+	specials := map[rune] int{
+		'*':10,
+		'.':9,
+		'+':8,
+		'?':7,
+		'|':6,
+	 }
+
 	// array of runes (chars)
 	postfix := []rune{}
 	//store operators from infix
@@ -29,7 +40,7 @@ func IntoPost (infix string) string {
 					stack = stack[:len(stack) -1] //everything in stack up to closing bracket
 				}
 				stack = stack[:len(stack) -1]
-			// if element isn't in map, return 0
+			// if the rune is a special character
 			case specials[r] > 0:
 				for len(stack) > 0 && specials[r] <= specials[stack[len(stack) -1]]{
 					postfix = append(postfix, stack[len(stack)-1])
@@ -46,25 +57,6 @@ func IntoPost (infix string) string {
 		postfix = append(postfix, stack[len(stack)-1])
 		stack = stack[:len(stack) -1]
 	}
-	fmt.Println(postfix)
 	//cast runes to string
 	return string(postfix)
-
-}
-
-func main(){
-	//Answer : ab.c*
-	fmt.Println("Example 1: ")
-	fmt.Println("Infix:", "a.b.c*")
-	fmt.Println("Postfix: ", IntoPost("a.b.c*"))
-
-	//Answer : ab*c.b|
-	fmt.Println("\nExample 2:")
-	fmt.Println("Infix: ", "a*b.c|b")
-	fmt.Println("Postfix: ", IntoPost("a*b.c|b"))
-
-	//Answer : a|c*b
-	fmt.Println("Infix: ", "a|c*b")
-	fmt.Println("Postfix: ", IntoPost("a|c*b"))
-
 }
