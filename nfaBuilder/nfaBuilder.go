@@ -36,7 +36,8 @@ func poregtonfa(pofix string) *nfa{
 	//loop through expression rune at a time
 	for _, r := range pofix{
 
-		switch r{
+		switch r {
+
 		// The . operator indicates concatination	
 		case '.':
 			//pop 2 things off nfa stack
@@ -110,7 +111,10 @@ func poregtonfa(pofix string) *nfa{
 			initial := state{edge1: frag.initial, edge2: frag.accept}
 			// add the nfa to the stack
 			nfastack = append(nfastack, &nfa{initial: &initial, accept: frag.accept})
+		
 		default:
+			fmt.Print("In default state       ")
+			fmt.Println(r, string(r))
 			accept := state{}
 			initial := state{symbol : r, edge1:  &accept }
 
@@ -122,6 +126,7 @@ func poregtonfa(pofix string) *nfa{
 	//TODO: error checking 
 	if len(nfastack) != 1{
 		fmt.Println("whoops! ", len(nfastack), nfastack)
+		
 	}
 	return nfastack[0] 
 }
