@@ -1,9 +1,10 @@
+/*Adapted from:
+	(1): https://stackoverflow.com/questions/20895552/how-to-read-input-from-console-line
+*/
 package main
 
 import (
 	"fmt"
-	"os"
-	"bufio"
 	infixToPostfix "./infixToPostfix"
 	nfaBuilder "./NfaBuilder"
 	
@@ -12,63 +13,50 @@ import (
 
 func generateNFA(postfix string) {
 		//promt the user to enter a string to test against NFA
-		fmt.Print("Enter string to test against NFA: ")
+		fmt.Println("Enter string to test against NFA: ")
 		//Read in the user's input from the cmd
-		var scanner  = bufio.NewScanner(os.Stdin)
-		scanner.Scan()
-		userTest := scanner.Text()
+		var userTest string
+		fmt.Scanln(&userTest)
 		//Generaete NFA and test with user's input & print results
 		fmt.Println(nfaBuilder.PoMatch(postfix, userTest))
 }
 
 func main(){
-	
+		// userinput / infix expression / posfix expression
+		var userInput, infix, postfix string
+		//print a menu to cmd containing user's options
+		printMenu()
+		//Read in the user's input from the cmd
+		fmt.Scanln(&userInput)
 		//Loop for user input
-		for{
-	
-			fmt.Println("Enter (1) to generate an NFA from infix notation" +
-			"\nEnter (2) to generate an NFA from postfix notation" +
-			"\nEnter (3) to Exit\n")
-			
-			//Read in the user's input from the cmd
-			var scanner  = bufio.NewScanner(os.Stdin)
-			scanner.Scan()
-			userInput := scanner.Text()
-	
+		for userInput!="3"{
 			// User options
 			switch userInput {
 				case "1":
+					//prompt the user to enter the infix string
 					fmt.Println("Enter infix expression to generate NFA: ")
-					//promt the user to enter the infix string
-					fmt.Print("Enter infix expression: ")
-					infixString := scanner.Text()
-		
+					fmt.Scanln(&infix)
 					//Convert string to postfix notation
-					postfix := infixToPostfix.IntoPost(infixString)
+					postfix := infixToPostfix.IntoPost(infix)
 					//create & test NFA
 					generateNFA(postfix)
 				case "2": 
 					fmt.Println("Enter postfix expression to generate NFA: ")
-					//promt the user to enter the postfix string
-					fmt.Print("Enter infix expression: ")
-					postfix := scanner.Text()
+					//prompt the user to enter the postfix string
+					fmt.Scanln(&postfix)
 					//create & test NFA
 					generateNFA(postfix)
-				case "3": 
-					fmt.Print("Exiting ....")
-					break
 				default:
-					fmt.Println("Enter one of the above options")
+					fmt.Println("Please enter a valid option")
 			}
-		}
+			printMenu()
+			fmt.Scanln(&userInput)
+		}//for
 	}
 	
-
-		/*
-	//==== Example Cases ====//
-	postfix := infixToPostfix.IntoPost("abc..")
-	//output should be : "ab.c*"
-	fmt.Println(postfix)
-	// Evalutation is true given input
-	fmt.Println(nfaBuilder.PoMatch(postfix, "ab")) //return true
-	*/
+//Prints a selection of options to the user via the cmd
+func printMenu(){
+	fmt.Println("Enter (1) to generate an NFA from infix notation" +
+	"\nEnter (2) to generate an NFA from postfix notation" +
+	"\nEnter (3) to Exit")
+}

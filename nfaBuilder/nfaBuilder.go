@@ -1,16 +1,13 @@
+/* References:
+(1) Thompsons algorithim in C: https://swtch.com/~rsc/regexp/regexp1.html
+(2) Ian Mcloughlin's Videos (gmit.Learnonline)
+*/
 package nfaBuilder
 
 import (
 	"fmt"
 
 )
-/* References:
-(1) Thompsons algorithim in C: https://swtch.com/~rsc/regexp/regexp1.html
-(2) Ian Mcloughlin's Videos (gmit.Learnonline)
-*/
-
-
-
 /* State struct contains three parts:
 (1) Rune representing the character
 (2) One edge pointing to another state (character)
@@ -31,6 +28,8 @@ type nfa struct {
 // Takes a postfix regular expression and converts it to an nfa,
 // returning a pointer to it
 func poregtonfa(pofix string) *nfa{
+	
+	
 	nfastack := []*nfa{}
 
 	//loop through expression rune at a time
@@ -131,6 +130,8 @@ func poregtonfa(pofix string) *nfa{
 func PoMatch (po string, s string) bool {
 	
 	ismatch := false
+
+	
 	//create automata
 	ponfa := poregtonfa(po)
 	fmt.Println(ponfa)
