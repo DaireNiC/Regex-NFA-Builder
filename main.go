@@ -25,7 +25,10 @@ func generateNFA(postfix string) {
 		var userTest string
 		fmt.Scanln(&userTest)
 		//Generaete NFA and test with user's input & print results
-		fmt.Println(nfaBuilder.PoMatch(postfix, userTest))
+		fmt.Println("===== Result ======")
+		fmt.Print("Evaluation: ")
+		fmt.Print(nfaBuilder.PoMatch(postfix, userTest))
+		fmt.Println("")
 }
 
 func main(){
@@ -63,7 +66,7 @@ func main(){
 	
 //Prints a selection of options to the user via the cmd
 func printMenu(){
-	fmt.Println("Enter (1) to generate an NFA from infix notation" +
+	fmt.Println("\nEnter (1) to generate an NFA from infix notation" +
 	"\nEnter (2) to generate an NFA from postfix notation" +
 	"\nEnter (3) to Exit")
 }
