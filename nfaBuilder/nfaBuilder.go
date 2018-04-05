@@ -1,4 +1,9 @@
-/* References:
+/* 
+-------------------------------------------------------------
+Builds an NFA from a series of smaller NFAs reresenting
+the postfix string specified by user
+-------------------------------------------------------------
+References:
 (1) Thompsons algorithim in C: https://swtch.com/~rsc/regexp/regexp1.html
 (2) Ian Mcloughlin's Videos (gmit.Learnonline)
 */
@@ -29,7 +34,7 @@ type nfa struct {
 // returning a pointer to it
 func poregtonfa(pofix string) *nfa{
 	
-	
+	// stack structure for LIFO operations
 	nfastack := []*nfa{}
 
 	//loop through expression rune at a time
@@ -107,31 +112,28 @@ func poregtonfa(pofix string) *nfa{
 			initial := state{edge1: frag.initial, edge2: frag.accept}
 			// add the nfa to the stack
 			nfastack = append(nfastack, &nfa{initial: &initial, accept: frag.accept})
-		
+		//a regular rune
 		default:
-		//	fmt.Print("In default state       ")
-		//	fmt.Println(r, string(r))
 			accept := state{}
 			initial := state{symbol : r, edge1:  &accept }
-
 			nfastack= append (nfastack, &nfa {initial: &initial, accept: &accept})
 		}
 	}
 	
 	//should be only one item at end --> nfa you want to return
-	//TODO: error checking 
 	if len(nfastack) != 1{
-		fmt.Println("whoops! ", len(nfastack), nfastack)
+		fmt.Println("Oooops! There was an error building your NFA. Please check your input and try again.", len(nfastack), nfastack)
 		
 	}
 	return nfastack[0] 
 }
-//this method runs a given sring through the NFA created returning  a bool indicationg if it is a match/not
+//PoMatch runs a given string through the NFA created returning 
+// a bool which indicates if it is a match/not
 func PoMatch (po string, s string) bool {
 	
+	// Evalutation for matching
 	ismatch := false
 
-	
 	//create automata
 	ponfa := poregtonfa(po)
 	fmt.Println(ponfa)
@@ -168,7 +170,7 @@ func PoMatch (po string, s string) bool {
 
 	return ismatch
 }
-//helper function
+// Helper function to add a state to the overall NFA struct
 func addState(l []*state, s *state, a *state) []*state {
 	l = append(l, s)
 	//E arrows

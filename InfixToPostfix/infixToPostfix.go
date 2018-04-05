@@ -1,17 +1,19 @@
-package infixToPostfix
-
-/* Implementation of the Shunting Yard Algorithim in Go
+/* 
+--------------------------------------------------------------------
+Implementation of the Shunting Yard Algorithim in Go
+--------------------------------------------------------------------
  Resources:
  	(1): https://en.wikipedia.org/wiki/Shunting-yard_algorithm
 	(2): http://eddmann.com/posts/shunting-yard-implementation-in-java/	
 	(3): https://www.youtube.com/watch?v=HJOnJU77EUs
 	(4): Video provided by Ian McLoughlin @GMIT
 */
+package infixToPostfix
 
-//IntoPost a string given in infix to postfix notation
+//IntoPost converts and returns a string given in infix to postfix notation
 func IntoPost (infix string) string {
 	// using runes instead of chars, in GO --> UTF-8
-	// ref for special chars & precendence
+	// ref for special chars stored in map struct
 	// guidelines: http://www.boost.org/doc/libs/1_56_0/libs/regex/doc/html/boost_regex/syntax/basic_extended.html#boost_regex.syntax.basic_extended.operator_precedence
 	specials := map[rune] int{
 		'*':10,
@@ -24,7 +26,7 @@ func IntoPost (infix string) string {
 	// array of runes (chars)
 	postfix := []rune{}
 	//store operators from infix
-	stack :=[]rune{}
+	stack :=[]rune{} //stack for LIFO operations
 
 	//loop through infix, return index of char currently reading
 	//r is the char*(rune) at that index

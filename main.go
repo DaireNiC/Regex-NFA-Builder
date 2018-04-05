@@ -1,4 +1,11 @@
-/*Adapted from:
+/*
+--------------------------------------------------------------
+Reads in user input via the command line. Parses input &
+convets infix notation to postfix if required using
+infixtoPostix package. Reads in userinput to test against the
+NFA created.
+--------------------------------------------------------------
+Resources:
 	(1): https://stackoverflow.com/questions/20895552/how-to-read-input-from-console-line
 */
 package main
@@ -10,7 +17,8 @@ import (
 	
 
 )
-
+// Uses postfix notation to geenerate NFA
+// Reads in userinput to test regex matching with NFA
 func generateNFA(postfix string) {
 		//promt the user to enter a string to test against NFA
 		fmt.Println("Enter string to test against NFA: ")
