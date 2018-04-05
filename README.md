@@ -1,4 +1,5 @@
 
+  
 # Regex to NFA Builder
 A command-line application that converts regular expressions to NFAs. The application then allows users to test input against the built NFA. 
 ## About
@@ -30,6 +31,10 @@ This application was created as part of my Graph Theory Module in GMIT. The code
 > you should at least attempt to expand these to all of the digits, and
 > the characters a to z, and A to Z.
 
+
+
+
+
 ## Problem Simplified 
   * Go program to build NFA from regex
   * Use NFA to check if regex matches string
@@ -42,7 +47,14 @@ This application was created as part of my Graph Theory Module in GMIT. The code
     3. Builds a series of small NFA’s representing parts of the regular expression.
     4. Uses the smaller NFA’s to create the overall NFA.
     5. User enters input to implememnt the matching algorithm using the newly created NFA.
-    
+   
+  
+   ||Special Characters Recognised|
+|--|--|
+| &#124; | OR |
+| * | zero or more |
+ |  +  | one or more |
+| ? | zero or one|
 ## Running the program
 [Go](https://golang.org) must be installed to run the code. Follow official guidelines here.
 
@@ -74,6 +86,9 @@ Resources:
 * (3): [Youtube Video on Shunting Yard Algorithm](https://www.youtube.com/watch?v=HJOnJU77EUs)
 * (4): [Go Lang video provided by Ian McLoughlin](https://web.microsoftstream.com/video/9d83a3f3-bc4f-4bda-95cc-b21c8e67675e) 
 
+### Building the NFA
+
+
 ## Testing
 In an effort to both understand and get experience with Unit Testing using GoLang I created a test suite. I used the GoLang Docs [here](https://golang.org/pkg/testing/) for guidance on creating and running tests using Go. 
 
@@ -83,11 +98,25 @@ The second tests the postfix to NFA creation. Test tables were used for efficien
 
 ### Running the Tests
 
- 1.  Navigate to the folder
+ -  Navigate to the folder
 ```bash
 	cd Regex-NFA-Builder/Tests
 ```
-2. Execute the tests
+ - Execute the tests
 ```go
 	go test
 ```
+
+
+## ReadMe, GoDocs, Code Comments
+ - http://whipperstacker.com/2015/10/14/idiomatic-doc-comments-document-your-function-not-your-function-signature/
+ - https://blog.golang.org/godoc-documenting-go-code
+
+## Extras relevant to Project
+
+ - The regex engine can both create NFAs & test them against strings over the alaphabet a to z, and A to Z. It can also recognise all digits.
+ - The special character "+", which means 'at least one of' was added as an extra feature
+  - The special character "?", which means 'zero or one of' was added as an extra feature also
+ - Comprehensive tests were added to the project for robustness
+ - An extensive github history indicating the time spent on research, coding, documentation and referencing where due.
+ - Consistent work ethic, committing week by week to the repo.
