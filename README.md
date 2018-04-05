@@ -31,9 +31,9 @@ This application was created as part of my Graph Theory Module in GMIT. The code
 > you should at least attempt to expand these to all of the digits, and
 > the characters a to z, and A to Z.
 
-|Requirements|  |
-|--|--|
-|  |  |
+
+
+
 
 ## Problem Simplified 
   * Go program to build NFA from regex
@@ -47,7 +47,14 @@ This application was created as part of my Graph Theory Module in GMIT. The code
     3. Builds a series of small NFA’s representing parts of the regular expression.
     4. Uses the smaller NFA’s to create the overall NFA.
     5. User enters input to implememnt the matching algorithm using the newly created NFA.
-    
+   
+  
+   ||Special Characters Recognised|
+|--|--|
+| &#124; | OR |
+| * | zero or more |
+ |  +  | one or more |
+| ? | zero or one|
 ## Running the program
 [Go](https://golang.org) must be installed to run the code. Follow official guidelines here.
 
