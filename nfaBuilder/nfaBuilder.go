@@ -11,7 +11,6 @@ package nfaBuilder
 
 import (
 	"fmt"
-
 )
 /* State struct contains three parts:
 (1) Rune representing the character
@@ -136,7 +135,6 @@ func PoMatch (po string, s string) bool {
 
 	//create automata
 	ponfa := poregtonfa(po)
-	fmt.Println(ponfa)
 
 	//initial state & everything you can get to from current state
 	current := []*state{}

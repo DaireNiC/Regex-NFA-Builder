@@ -1,9 +1,10 @@
 /*
 --------------------------------------------------------------
 Reads in user input via the command line. Parses input &
-convets infix notation to postfix if required using
-infixtoPostix package. Reads in userinput to test against the
-NFA created.
+converts infix notation to postfix if required using the
+infixtoPostix package. Builds the NFA from the postfix 
+expression using the NFABuilder Package. Reads in user input
+to test against the NFA created.
 --------------------------------------------------------------
 Resources:
 	(1): https://stackoverflow.com/questions/20895552/how-to-read-input-from-console-line
@@ -14,8 +15,6 @@ import (
 	"fmt"
 	infixToPostfix "./infixToPostfix"
 	nfaBuilder "./NfaBuilder"
-	
-
 )
 // Uses postfix notation to geenerate NFA
 // Reads in userinput to test regex matching with NFA

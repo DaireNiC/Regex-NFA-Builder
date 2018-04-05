@@ -1,6 +1,7 @@
 /* 
 --------------------------------------------------------------------
 Implementation of the Shunting Yard Algorithim in Go
+Used to convert from Infix notation to Postfix
 --------------------------------------------------------------------
  Resources:
  	(1): https://en.wikipedia.org/wiki/Shunting-yard_algorithm
