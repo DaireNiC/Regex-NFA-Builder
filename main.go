@@ -14,7 +14,7 @@ package main
 import (
 	"fmt"
 	infixToPostfix "./infixToPostfix"
-	nfaBuilder "./NfaBuilder"
+	nfaBuilder "./nfaBuilder"
 )
 // Uses postfix notation to geenerate NFA
 // Reads in userinput to test regex matching with NFA
