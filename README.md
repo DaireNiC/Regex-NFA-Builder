@@ -34,8 +34,7 @@ This application was created as part of my Graph Theory Module in GMIT. The code
   * Go program to build NFA from regex
   * Use NFA to check if regex matches string
   * Regex => regular characters + special characters 
-
-  
+ ![flow_chart](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/flow_chart.JPG)
 ## How it works
 
     1. Reads in user input in postfix/infix notation
