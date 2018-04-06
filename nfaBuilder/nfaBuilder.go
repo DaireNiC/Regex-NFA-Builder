@@ -134,38 +134,42 @@ func PoMatch (po string, s string) bool {
 	ismatch := false
 
 	//create automata
-	ponfa := poregtonfa(po)
+	if len(po) < 1{
+		fmt.Println("Error! Please enter a valid expression")
+		
+	}else{
+		ponfa := poregtonfa(po)
 
-	//initial state & everything you can get to from current state
-	current := []*state{}
-	next := []*state{}
+		//initial state & everything you can get to from current state
+		current := []*state{}
+		next := []*state{}
 
 
-	current = addState(current[:], ponfa.initial, ponfa.accept)
+		current = addState(current[:], ponfa.initial, ponfa.accept)
 
-	/* 	Read a char at a time & take all current 
-	 	states checking if labelled
-	*/
-	for _, r := range s {
-		//current state
+		/* 	Read a char at a time & take all current 
+			states checking if labelled
+		*/
+		for _, r := range s {
+			//current state
+			for _, c := range current {
+				//same symbol
+				if c.symbol == r{
+					next = addState(next[:], c.edge1, ponfa.accept)
+				}
+			}
+			current, next = next, []*state{}
+		}
+
+		// loop through current state array and check if there are any accept states
 		for _, c := range current {
 			//same symbol
-			if c.symbol == r{
-				next = addState(next[:], c.edge1, ponfa.accept)
+			if c == ponfa.accept{
+				ismatch = true
+				break;
 			}
 		}
-		current, next = next, []*state{}
 	}
-
-	// loop through current state array and check if there are any accept states
-	for _, c := range current {
-		//same symbol
-		if c == ponfa.accept{
-			ismatch = true
-			break;
-		}
-	}
-
 	return ismatch
 }
 // Helper function to add a state to the overall NFA struct
