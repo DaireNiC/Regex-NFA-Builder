@@ -63,7 +63,7 @@ func main(){
 			fmt.Scanln(&userInput)
 		}//for
 	}
-	
+
 //Prints a selection of options to the user via the cmd
 func printMenu(){
 	fmt.Println("\nEnter (1) to generate an NFA from infix notation" +
