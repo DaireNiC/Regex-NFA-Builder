@@ -31,15 +31,12 @@ This application was created as part of my Graph Theory Module in GMIT. The code
 > you should at least attempt to expand these to all of the digits, and
 > the characters a to z, and A to Z.
 
-
-
-
-
 ## Problem Simplified 
   * Go program to build NFA from regex
   * Use NFA to check if regex matches string
   * Regex => regular characters + special characters 
  ![flow_chart](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/flow_chart.JPG)
+ 
 ## How it works
 
     1. Reads in user input in postfix/infix notation
@@ -48,7 +45,9 @@ This application was created as part of my Graph Theory Module in GMIT. The code
     4. Uses the smaller NFA’s to create the overall NFA.
     5. User enters input to implememnt the matching algorithm using the newly created NFA.
    
-  
+
+![cmd](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/cmd_01.JPG)  
+
    ||Special Characters Recognised|
 |--|--|
 | &#124; | OR |
@@ -92,7 +91,9 @@ Resources:
 ## Testing
 In an effort to both understand and get experience with Unit Testing using GoLang I created a test suite. I used the GoLang Docs [here](https://golang.org/pkg/testing/) for guidance on creating and running tests using Go. 
 
-The first test tests the conversion of infix notation to postfix. The test coverage is 100% and covers a range of cases.  
+The first test tests the conversion of infix notation to postfix. The test coverage is 97~% and covers a range of cases.  
+
+![test_coverage](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/nfabuilder_testcoverage.JPG)
 
 The second tests the postfix to NFA creation. Test tables were used for efficient creation of tests and their assertions. Guidance on the use of test tables was found on [this blog](https://blog.alexellis.io/golang-writing-unit-tests/). 
 
@@ -106,7 +107,6 @@ The second tests the postfix to NFA creation. Test tables were used for efficien
 ```go
 	go test
 ```
-
 
 ## ReadMe, GoDocs, Code Comments
  - http://whipperstacker.com/2015/10/14/idiomatic-doc-comments-document-your-function-not-your-function-signature/
