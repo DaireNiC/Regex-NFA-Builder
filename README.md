@@ -49,13 +49,7 @@ This application was created as part of my Graph Theory Module in GMIT. The code
 
 ![cmd](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/cmd_01.JPG)  
 
-   ||Special Characters Recognised|
-|--|--|
-| &#124; | OR |
-| .| concatenation |
-| * | zero or more |
-|  +  | one or more |
-| ? | zero or one|
+
 ## Running the program
 [Go](https://golang.org) must be installed to run the code. Follow official guidelines here.
 
@@ -100,8 +94,8 @@ type  nfa  struct {
 }
 ```
 
- Normal characters (*any char that is not a special character*) are pushed to the stack in the from of a fragment as detailed below.  As it is an NFA, the empty regular expression **ε** is also included.
-----image>
+ Normal characters (*see below for special characters*) are pushed to the stack in the from of a fragment as detailed below.  As it is an NFA, the empty regular expression **ε** is also included.
+![non_special_character](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/nonspecial_char.JPG)
 
 The struct used to represent the states and arrows is shown below. In Thompson's Construction, every state has two arrows at max.  In the case of only one arrow from a state, the second edge will simply be ignored. 
 ```go
@@ -111,7 +105,16 @@ type  state  struct {
 	edge2 *state 
 }
 ```
- The special characters(link up)pop from & push to the stack. 
+ The following are considered special characters. These characters pop from & push  elements to the stack. 
+ 
+ ||Special Characters Recognised|		|
+|--|--|--|
+| &#124; | OR | ![or](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/OR.JPG)|
+| .| concatenation |![concat](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/concat.JPG)|
+| * | zero or more |![zero_or_more](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/zero_or_more.JPG)|
+|  +  | one or more |![enter image description here](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/one_or_more.JPG)|
+| ? | zero or one|![enter image description here](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/zero_or_one..JPG)|
+ 
 
 
 
