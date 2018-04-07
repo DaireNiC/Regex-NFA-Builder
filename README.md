@@ -1,4 +1,5 @@
 
+
   
 # Regex to NFA Builder
 A command-line application that converts regular expressions to NFAs. The application then allows users to test input against the built NFA. 
@@ -91,7 +92,7 @@ Resources:
 ## Testing
 In an effort to both understand and get experience with Unit Testing using GoLang I created a test suite. I used the GoLang Docs [here](https://golang.org/pkg/testing/) for guidance on creating and running tests using Go. 
 
-The first test tests the conversion of infix notation to postfix. The test coverage is 97~% and covers a range of cases.  
+The first test tests the conversion of infix notation to postfix. The test coverage in all tests is 97~% and covers a range of cases.  
 
 ![test_coverage](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/nfabuilder_testcoverage.JPG)
 
@@ -107,16 +108,18 @@ The second tests the postfix to NFA creation. Test tables were used for efficien
 ```go
 	go test
 ```
-
-## ReadMe, GoDocs, Code Comments
- - http://whipperstacker.com/2015/10/14/idiomatic-doc-comments-document-your-function-not-your-function-signature/
- - https://blog.golang.org/godoc-documenting-go-code
-
 ## Extras relevant to Project
 
  - The regex engine can both create NFAs & test them against strings over the alaphabet a to z, and A to Z. It can also recognise all digits.
  - The special character "+", which means 'at least one of' was added as an extra feature
-  - The special character "?", which means 'zero or one of' was added as an extra feature also
+  - The special character "?", which means 'zero or one of' was added as an extra feature 
  - Comprehensive tests were added to the project for robustness
  - An extensive github history indicating the time spent on research, coding, documentation and referencing where due.
  - Consistent work ethic, committing week by week to the repo.
+
+## Go application Structure, GoDocs, Code Comments
+Guidance on structuring code in Go (comments, tests, best practises, documentation) was found on the following blogs & articles :
+ - https://medium.com/@benbjohnson/structuring-applications-in-go-3b04be4ff091
+ - http://blog.el-chavez.me/2013/08/29/golang-documenting-package-examples/
+ - http://whipperstacker.com/2015/10/14/idiomatic-doc-comments-document-your-function-not-your-function-signature/
+ - https://blog.golang.org/godoc-documenting-go-code
