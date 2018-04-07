@@ -24,7 +24,7 @@ var nfabuilderTests = []struct {
 	{"ab.", "b", false},
 	{"ab.", "a", false},
 	// + operator --> one or more
-	{"10.1+", "", false},
+	{"10.1.+", "", false},
 	{"10.1.+", "101101101", true},
 	{"10.1.+", "101", true},
 	// ? operator --> zero or one
