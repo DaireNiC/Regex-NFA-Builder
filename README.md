@@ -52,8 +52,9 @@ This application was created as part of my Graph Theory Module in GMIT. The code
    ||Special Characters Recognised|
 |--|--|
 | &#124; | OR |
+| .| concatenation |
 | * | zero or more |
- |  +  | one or more |
+|  +  | one or more |
 | ? | zero or one|
 ## Running the program
 [Go](https://golang.org) must be installed to run the code. Follow official guidelines here.
@@ -87,6 +88,31 @@ Resources:
 * (4): [Go Lang video provided by Ian McLoughlin](https://web.microsoftstream.com/video/9d83a3f3-bc4f-4bda-95cc-b21c8e67675e) 
 
 ### Building the NFA
+Thompsons's Construction Algorithim is used to build NFA's from the user's input in postfix notation. Both NFA's and Regular expressions have the same computational power, therefore any language that can be recognised by a regex can also be represented as a NFA, and visa versa.  (link)
+
+Thompson's Construction uses fragments to create an NFA that recognises a given regular expression in postfix notation. A fragment in this case, is a smaller NFA used to build a larger, overall NFA. 
+
+A stack structure is used to store the fragments for the creation of the overall NFA. In Thompsons Construction, all fragments have a single initial state(required for an NFA) and a single final state. I used the following NFA struct  to represent this:
+```go
+type  nfa  struct {
+	initial *state
+	accept *state
+}
+```
+
+ Normal characters (*any char that is not a special character*) are pushed to the stack in the from of a fragment as detailed below.  As it is an NFA, the empty regular expression **ε** is also included.
+----image>
+
+The struct used to represent the states and arrows is shown below. In Thompson's Construction, every state has two arrows at max.  In the case of only one arrow from a state, the second edge will simply be ignored. 
+```go
+type  state  struct {
+	symbol rune // if ε, will be represented as a 0 value
+	edge1 *state //pointers to other states (similar to linked list)
+	edge2 *state 
+}
+```
+ The special characters(link up)pop from & push to the stack. 
+
 
 
 ## Testing
@@ -113,11 +139,21 @@ The second tests the postfix to NFA creation. Test tables were used for efficien
  - The regex engine can both create NFAs & test them against strings over the alaphabet a to z, and A to Z. It can also recognise all digits.
  - The special character "+", which means 'at least one of' was added as an extra feature
   - The special character "?", which means 'zero or one of' was added as an extra feature 
+  - Options for infix or postfix input
  - Comprehensive tests were added to the project for robustness
  - An extensive github history indicating the time spent on research, coding, documentation and referencing where due.
  - Consistent work ethic, committing week by week to the repo.
 
-## Go application Structure, GoDocs, Code Comments
+
+----------
+## Research
+###  Finite Automata & Regular Expressions
+While researching both the theory and implementation of finite automata, I used The Theory of Computation by Michael Sipser along with Dr.Ian McLoughlin's notes (lecturer @ GMIT)  as my primary resources. 
+
+For the creation of the Regex to NFA builder, the paper [Regular Expression Matching Can Be Simple And Fast](https://swtch.com/~rsc/regexp/regexp1.html) by Russ Cox was the primary basis for the code written in this application. Cox provides an implementation in C, which I adapted to run as a Go program.
+
+
+### Go application Structure, GoDocs, Code Comments
 Guidance on structuring code in Go (comments, tests, best practises, documentation) was found on the following blogs & articles :
  - https://medium.com/@benbjohnson/structuring-applications-in-go-3b04be4ff091
  - http://blog.el-chavez.me/2013/08/29/golang-documenting-package-examples/
