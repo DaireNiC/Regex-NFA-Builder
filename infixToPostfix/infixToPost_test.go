@@ -10,14 +10,14 @@ package infixToPostfix
 
 import (
 	"testing"
-	//infixToPostfix "../infixToPostfix"
+
 )
 
 //Table structure for testdata
 var infixToPostfixTests = []struct {
 	n string // infix regex string
 	expected         string //expected result
-  }{x
+  }{
 //==|| INFIX |  POSTFIX ||==//  
 	{"(a.b)*c", "ab.c*"},
 	{"(a.(b|d))*", "abd|.*"},
