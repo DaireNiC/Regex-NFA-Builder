@@ -97,7 +97,7 @@ type  nfa  struct {
  Normal characters (*see below for special characters*) are pushed to the stack in the from of a fragment as detailed below.  As it is an NFA, the empty regular expression **ε** is also included.
 ![non_special_character](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/nonspecial_char.JPG)
 
-The struct used to represent the states and arrows is shown below. In Thompson's Construction, every state has two arrows at max.  In the case of only one arrow from a state, the second edge will simply be ignored. 
+The struct used to represent the states and arrows is shown below. In Thompson's Construction, every state has two arrows at max.  In the case of only one arrow from a state, the second edge will simply be ignored. The state struct can be considered a traditional NFA state and edges encompassed in one data structure.
 ```go
 type  state  struct {
 	symbol rune // if ε, will be represented as a 0 value
@@ -107,16 +107,28 @@ type  state  struct {
 ```
  The following are considered special characters. These characters pop from & push  elements to the stack. 
  
- ||Special Characters Recognised|		|
+ ||Special Characters | Automaton	|
 |--|--|--|
 | &#124; | OR | ![or](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/OR.JPG)|
 | .| concatenation |![concat](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/concat.JPG)|
 | * | zero or more |![zero_or_more](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/zero_or_more.JPG)|
 |  +  | one or more |![enter image description here](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/one_or_more.JPG)|
 | ? | zero or one|![enter image description here](https://github.com/DaireNiC/Regex-NFA-Builder/blob/master/media/zero_or_one..JPG)|
- 
 
+   *Images courtesy of Rus Cox's [paper](https://swtch.com/~rsc/regexp/regexp1.html)*
+  
+  Once the NFA is created, the user can use it to  test various strings against. 
 
+### String Matching
+String matching is completed using the PoMatch Function:
+```go
+	func PoMatch (postfix string, s string) bool {
+	...
+	}
+```
+Given the regular expression in postfix notation and a string to run through the NFA once built, a boolean is returned indicating if it is a match/not.
+
+The NFA is first created using the previously described NFA fragments. The string matching algorithim is then implemented.  When matching aginst an NFA, the input can be in any number of states at a given time. To keep track of the states, an array of pointers to the current states is used. The current set of states are updated with each character of the input string as it is read in.  If any of the current states are the **accept state** (indicated by symbol = 0 and no arrows coming from it),  the function returns with a true value.
 
 ## Testing
 In an effort to both understand and get experience with Unit Testing using GoLang I created a test suite. I used the GoLang Docs [here](https://golang.org/pkg/testing/) for guidance on creating and running tests using Go. 
@@ -146,15 +158,12 @@ The second tests the postfix to NFA creation. Test tables were used for efficien
  - Comprehensive tests were added to the project for robustness
  - An extensive github history indicating the time spent on research, coding, documentation and referencing where due.
  - Consistent work ethic, committing week by week to the repo.
-
-
 ----------
 ## Research
 ###  Finite Automata & Regular Expressions
-While researching both the theory and implementation of finite automata, I used The Theory of Computation by Michael Sipser along with Dr.Ian McLoughlin's notes (lecturer @ GMIT)  as my primary resources. 
+While researching both the theory and implementation of finite automata, I used The Theory of Computation by Michael Sipser along with Dr.Ian McLoughlin's notes (lecturer @ GMIT)  as my primary resources.  Considering the amount of code available for the project, I directed a lot of time towards research and understanding the theory behind the construction.
 
-For the creation of the Regex to NFA builder, the paper [Regular Expression Matching Can Be Simple And Fast](https://swtch.com/~rsc/regexp/regexp1.html) by Russ Cox was the primary basis for the code written in this application. Cox provides an implementation in C, which I adapted to run as a Go program.
-
+For the creation of the Regex to NFA builder, the paper [Regular Expression Matching Can Be Simple And Fast](https://swtch.com/~rsc/regexp/regexp1.html) by Russ Cox was the primary basis for the code written in this application. Cox provides an implementation in C, which I adapted along with videos provided to create this Go program.
 
 ### Go application Structure, GoDocs, Code Comments
 Guidance on structuring code in Go (comments, tests, best practises, documentation) was found on the following blogs & articles :
